@@ -1,23 +1,24 @@
+import { getOptions } from 'loader-utils';
 import { join as joinPath } from 'path';
 import { build, findCargoDir } from './cargo';
-import { BuildConfig, LoaderContext } from './interfaces';
+import { LoaderContext } from './interfaces';
 import { readPromise } from './utils';
 
 const load = async (self: LoaderContext) => {
+    const options = {
+        gc: true,
+        target: 'wasm32-unknown-unknown',
+        release: true,
+        ...(getOptions(<any>self) || {})
+    };
+
     const rootDir = await findCargoDir(self.resourcePath);
 
     if (!rootDir) {
         throw new Error(`Unable to find Cargo.toml`);
     }
 
-    const buildConfig: BuildConfig = {
-        rootDir,
-        target: 'wasm32-unknown-unknown',
-        release: !self.debug,
-        gc: true
-    };
-
-    const { wasmFile, deps } = await build(self, buildConfig);
+    const { wasmFile, deps } = await build(self, { ...options, rootDir });
     const wasmData = await readPromise(wasmFile);
 
     self.addDependency(joinPath(rootDir, 'Cargo.toml'));
