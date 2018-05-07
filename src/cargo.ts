@@ -3,7 +3,7 @@ import { BuildConfig, LoaderContext } from './interfaces';
 import { execPromise, fileExists, readPromise, reverseString } from './utils';
 
 /** Parses a Cargo/rust dependency file (ex. '/target/debug/lib.d') */
-const parseDependencies = (data: string, wasmFile: string) =>
+export const parseDependencies = (data: string, wasmFile: string) =>
     data
         .split('\n')
         .filter(str => str.startsWith(wasmFile))
