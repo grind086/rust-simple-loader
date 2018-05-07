@@ -1,0 +1,27 @@
+{
+  "name": "rust-simple-loader",
+  "version": "0.0.1",
+  "description": "A simple rust loader for webpack",
+  "main": "index.js",
+  "author": "Rob Grindeland",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json",
+    "watch": "tsc -p ./tsconfig.json --watch"
+  },
+  "devDependencies": {
+    "@types/node": "^10.0.4",
+    "prettier": "^1.12.1",
+    "tslint": "^5.10.0",
+    "tslint-config-prettier": "^1.12.0",
+    "tslint-plugin-prettier": "^1.3.0",
+    "typescript": "^2.8.3"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "tabWidth": 4,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "none"
+  }
+}
